@@ -3,27 +3,27 @@ import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import java.io.File
 
-class Student(val group: String, // группа
-              val name: String, // ФИО
-              val ex: Int, // доп баллы
-              val lecAttendance: List<Boolean>, // посещаемость лекций
-              val labAttendance: List<Boolean>, // посещаемость лаб
-              val labWorks: List<Int>, // оценки за ЛР
-              val exams: List<Int>, // оценки за ЭП
-              val tests: List<Int>, // оценки за КР
-              val attest: String) { // аттестация
-// Вывод студента
+class Student(val group: String, // РіСЂСѓРїРїР°
+              val name: String, // Р¤РРћ
+              val ex: Int, // РґРѕРї Р±Р°Р»Р»С‹
+              val lecAttendance: List<Boolean>, // РїРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ Р»РµРєС†РёР№
+              val labAttendance: List<Boolean>, // РїРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ Р»Р°Р±
+              val labWorks: List<Int>, // РѕС†РµРЅРєРё Р·Р° Р›Р 
+              val exams: List<Int>, // РѕС†РµРЅРєРё Р·Р° Р­Рџ
+              val tests: List<Int>, // РѕС†РµРЅРєРё Р·Р° РљР 
+              val attest: String) { // Р°С‚С‚РµСЃС‚Р°С†РёСЏ
+// Р’С‹РІРѕРґ СЃС‚СѓРґРµРЅС‚Р°
     fun write() {
-        println("Студент: $name\n" +
-                "Доп баллы: $ex\n" +
-                "Посещаемость: ${attendanceGrade()}\n" +
-                "Оценки за:\n" +
-                "\tЛабораторные работы: $labWorks\n" +
-                "\tЭкзаменационный проект: $exams\n" +
-                "\tКонтрольные работы: $tests\n" +
-                "Итого баллов: ${getTotalScore() + ex}\n")
+        println("РЎС‚СѓРґРµРЅС‚: $name\n" +
+                "Р”РѕРї Р±Р°Р»Р»С‹: $ex\n" +
+                "РџРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ: ${attendanceGrade()}\n" +
+                "РћС†РµРЅРєРё Р·Р°:\n" +
+                "\tР›Р°Р±РѕСЂР°С‚РѕСЂРЅС‹Рµ СЂР°Р±РѕС‚С‹: $labWorks\n" +
+                "\tР­РєР·Р°РјРµРЅР°С†РёРѕРЅРЅС‹Р№ РїСЂРѕРµРєС‚: $exams\n" +
+                "\tРљРѕРЅС‚СЂРѕР»СЊРЅС‹Рµ СЂР°Р±РѕС‚С‹: $tests\n" +
+                "РС‚РѕРіРѕ Р±Р°Р»Р»РѕРІ: ${getTotalScore() + ex}\n")
     }
-// Подсчёт оценки посещаемости
+// РџРѕРґСЃС‡С‘С‚ РѕС†РµРЅРєРё РїРѕСЃРµС‰Р°РµРјРѕСЃС‚Рё
     fun attendanceGrade(): Int {
         val lecTrueCount = lecAttendance.count { it }
         val labTrueCount = labAttendance.count { it }
@@ -36,18 +36,18 @@ class Student(val group: String, // группа
             else -> 10
         }
     }
-// Подсчёт всех баллов для допуска (без ЭП и доп баллов)
+// РџРѕРґСЃС‡С‘С‚ РІСЃРµС… Р±Р°Р»Р»РѕРІ РґР»СЏ РґРѕРїСѓСЃРєР° (Р±РµР· Р­Рџ Рё РґРѕРї Р±Р°Р»Р»РѕРІ)
     fun getTotalScore(): Int {
         return attendanceGrade() + labWorks.sum() + tests.sum() * 2
     }
-// Получение данных об экзамене
+// РџРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РѕР± СЌРєР·Р°РјРµРЅРµ
     fun evalPreGrade(): String {
         return when {
-            getTotalScore() < 30 -> "недопуск"
-            (getTotalScore() + ex) < 60 -> "допуск"
-            (getTotalScore() + ex) < 75 -> "САМОКАТ"
-            (getTotalScore() + ex) < 90 -> "ХОРОШО"
-            else -> "ОТЛИЧНО"
+            getTotalScore() < 30 -> "РЅРµРґРѕРїСѓСЃРє"
+            (getTotalScore() + ex) < 60 -> "РґРѕРїСѓСЃРє"
+            (getTotalScore() + ex) < 75 -> "РЎРђРњРћРљРђРў"
+            (getTotalScore() + ex) < 90 -> "РҐРћР РћРЁРћ"
+            else -> "РћРўР›РР§РќРћ"
         }
     }
 }
@@ -69,7 +69,7 @@ data class GroupStats(
     val avgPercentAccess: Double,
     val avgPercentTotal: Double
 )
-// Список средних значений из Int
+// РЎРїРёСЃРѕРє СЃСЂРµРґРЅРёС… Р·РЅР°С‡РµРЅРёР№ РёР· Int
 fun averageIntList(lists: List<List<Int>>): List<Double> {
     if (lists.isEmpty()) return emptyList()
 
@@ -79,53 +79,53 @@ fun averageIntList(lists: List<List<Int>>): List<Double> {
     }
 }
 
-// Выбор ат ил н для группы в зависимости от того, чего больше
+// Р’С‹Р±РѕСЂ Р°С‚ РёР» РЅ РґР»СЏ РіСЂСѓРїРїС‹ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РѕРіРѕ, С‡РµРіРѕ Р±РѕР»СЊС€Рµ
 fun mostCommonAttest(attests: List<String>): String {
     return attests.groupBy { it }.maxByOrNull { it.value.size }?.key ?: ""
 }
 
-// Получение оценки из ячейки. Если там число, то возвращаем его, если строка, то преобразуем в баллы
+// РџРѕР»СѓС‡РµРЅРёРµ РѕС†РµРЅРєРё РёР· СЏС‡РµР№РєРё. Р•СЃР»Рё С‚Р°Рј С‡РёСЃР»Рѕ, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµРј РµРіРѕ, РµСЃР»Рё СЃС‚СЂРѕРєР°, С‚Рѕ РїСЂРµРѕР±СЂР°Р·СѓРµРј РІ Р±Р°Р»Р»С‹
 fun getCellGrade(cell: Cell): Int{
     return when (cell.cellType) {
         CellType.STRING -> {
             val stringValue = cell.stringCellValue
             when (stringValue) {
-                "д" -> 2
+                "Рґ" -> 2
                 "", "-" -> 0
                 else -> stringValue.toIntOrNull()
-                    ?: 0 // Попробуем преобразовать строку в число, если это не удастся, то 0
+                    ?: 0 // РџРѕРїСЂРѕР±СѓРµРј РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ СЃС‚СЂРѕРєСѓ РІ С‡РёСЃР»Рѕ, РµСЃР»Рё СЌС‚Рѕ РЅРµ СѓРґР°СЃС‚СЃСЏ, С‚Рѕ 0
             }
         }
         else -> cell.numericCellValue.toInt()
     }
 }
 
-// Чтение файла
+// Р§С‚РµРЅРёРµ С„Р°Р№Р»Р°
 fun fileRead(): List<Student> {
     val students = mutableListOf<Student>()
 
     val file = File("students.xlsx")
     val workbook = WorkbookFactory.create(file.inputStream())
-    // Проход по всем листам
+    // РџСЂРѕС…РѕРґ РїРѕ РІСЃРµРј Р»РёСЃС‚Р°Рј
     for (sheetNum in 0 until workbook.numberOfSheets) {
         val sheet = workbook.getSheetAt(sheetNum)
         var rowC = 0
-        // Выбор листов групп
+        // Р’С‹Р±РѕСЂ Р»РёСЃС‚РѕРІ РіСЂСѓРїРї
         if (("36" in sheet.sheetName) or ("39" in sheet.sheetName))
             for (row in sheet) {
-                // Пропуск двух строк
+                // РџСЂРѕРїСѓСЃРє РґРІСѓС… СЃС‚СЂРѕРє
                 if (rowC > 1)
                     if (row.getCell(0) != null) {
-                        val name = row.getCell(1).stringCellValue // получение ФИО
-                        val ex = row.getCell(2).numericCellValue.toInt() // получение доп баллов
+                        val name = row.getCell(1).stringCellValue // РїРѕР»СѓС‡РµРЅРёРµ Р¤РРћ
+                        val ex = row.getCell(2).numericCellValue.toInt() // РїРѕР»СѓС‡РµРЅРёРµ РґРѕРї Р±Р°Р»Р»РѕРІ
 
                         val lecAttendanceList = mutableListOf<Boolean>()
                         val labAttendanceList = mutableListOf<Boolean>()
                         var cellIndex = 4
-                        // Чтение данных о посещаемости отдельно для лекций и для лаб
+                        // Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… Рѕ РїРѕСЃРµС‰Р°РµРјРѕСЃС‚Рё РѕС‚РґРµР»СЊРЅРѕ РґР»СЏ Р»РµРєС†РёР№ Рё РґР»СЏ Р»Р°Р±
                         var leclab = true
                         while (sheet.getRow(0).getCell(cellIndex).cellType != CellType.STRING) {
-                            // переключение счёта лекций и лаб
+                            // РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЃС‡С‘С‚Р° Р»РµРєС†РёР№ Рё Р»Р°Р±
                             if (leclab and (sheet.getRow(0).getCell(cellIndex).numericCellValue == 1.0))
                                 leclab = false
                             else if (!leclab and (sheet.getRow(0).getCell(cellIndex).numericCellValue == 1.0))
@@ -137,31 +137,31 @@ fun fileRead(): List<Student> {
                             cellIndex += 1
                         }
 
-                        // Чтение оценок за лабораторные работы
+                        // Р§С‚РµРЅРёРµ РѕС†РµРЅРѕРє Р·Р° Р»Р°Р±РѕСЂР°С‚РѕСЂРЅС‹Рµ СЂР°Р±РѕС‚С‹
                         val labWorks = mutableListOf<Int>()
-                        for (i in cellIndex..(cellIndex + 6)) { // Колонки с ЛР1 по ЛР7
+                        for (i in cellIndex..(cellIndex + 6)) { // РљРѕР»РѕРЅРєРё СЃ Р›Р 1 РїРѕ Р›Р 7
                             val value = getCellGrade(row.getCell(i))
                             labWorks.add(value)
                         }
                         cellIndex += 7
 
-                        // Чтение оценок за экзаменационные работы
+                        // Р§С‚РµРЅРёРµ РѕС†РµРЅРѕРє Р·Р° СЌРєР·Р°РјРµРЅР°С†РёРѕРЅРЅС‹Рµ СЂР°Р±РѕС‚С‹
                         val exams = mutableListOf<Int>()
-                        for (i in cellIndex..(cellIndex + 4)) { // Колонки с ЭП1 по ЭП5
+                        for (i in cellIndex..(cellIndex + 4)) { // РљРѕР»РѕРЅРєРё СЃ Р­Рџ1 РїРѕ Р­Рџ5
                             val value = getCellGrade(row.getCell(i))
                             exams.add(value)
                         }
                         cellIndex += 5
 
-                        // Чтение оценок за контрольные работы
+                        // Р§С‚РµРЅРёРµ РѕС†РµРЅРѕРє Р·Р° РєРѕРЅС‚СЂРѕР»СЊРЅС‹Рµ СЂР°Р±РѕС‚С‹
                         val tests = mutableListOf<Int>()
-                        for (i in cellIndex..(cellIndex + 2)) { // Колонки с КР1 по КР3
+                        for (i in cellIndex..(cellIndex + 2)) { // РљРѕР»РѕРЅРєРё СЃ РљР 1 РїРѕ РљР 3
                             val value = getCellGrade(row.getCell(i))
                             tests.add(value)
                         }
                         cellIndex += 32
 
-                        // Создание объекта Student и добавление его в список
+                        // РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° Student Рё РґРѕР±Р°РІР»РµРЅРёРµ РµРіРѕ РІ СЃРїРёСЃРѕРє
                         val student = Student(sheet.sheetName, name, ex, lecAttendanceList, labAttendanceList, labWorks, exams, tests, row.getCell(cellIndex).stringCellValue)
                         students.add(student)
                     } else break
@@ -174,26 +174,26 @@ fun fileRead(): List<Student> {
     return students
 }
 
-// Вывод в таблицу групп значений ЛР, ЭП и КР
+// Р’С‹РІРѕРґ РІ С‚Р°Р±Р»РёС†Сѓ РіСЂСѓРїРї Р·РЅР°С‡РµРЅРёР№ Р›Р , Р­Рџ Рё РљР 
 fun printFormatted(value: Double): String {
     return when {
         value < 0.5 -> "-".padEnd(4)
         value < 1 -> "+".padEnd(4)
         value < 1.5 -> "++".padEnd(4)
-        value < 2.5 -> "д".padEnd(4)
+        value < 2.5 -> "Рґ".padEnd(4)
         else -> "${String.format("%.1f", value).padEnd(3)} "
     }
 }
 
 fun main() {
     /**
-     * Дана таблица с результатами обучения Вашей группы в семестре. Необходимо
-    прочитать все данные о посещаемости и все оценки за КР, ЛР и ЭП. Создать структуру классов
-    для хранения информации.
-    1 Прочитать суммарные баллы и оценки. Найти лабораторную работу, которую
-    выполнили наибольшее количество человек на любую оценку среди неполучивших допуск.
-    Найти КР, которую выполнили наименьшее количество человек хотя бы на допуск среди не
-    поливших допуск.
+     * Р”Р°РЅР° С‚Р°Р±Р»РёС†Р° СЃ СЂРµР·СѓР»СЊС‚Р°С‚Р°РјРё РѕР±СѓС‡РµРЅРёСЏ Р’Р°С€РµР№ РіСЂСѓРїРїС‹ РІ СЃРµРјРµСЃС‚СЂРµ. РќРµРѕР±С…РѕРґРёРјРѕ
+    РїСЂРѕС‡РёС‚Р°С‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ Рѕ РїРѕСЃРµС‰Р°РµРјРѕСЃС‚Рё Рё РІСЃРµ РѕС†РµРЅРєРё Р·Р° РљР , Р›Р  Рё Р­Рџ. РЎРѕР·РґР°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РєР»Р°СЃСЃРѕРІ
+    РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё.
+    1 РџСЂРѕС‡РёС‚Р°С‚СЊ СЃСѓРјРјР°СЂРЅС‹Рµ Р±Р°Р»Р»С‹ Рё РѕС†РµРЅРєРё. РќР°Р№С‚Рё Р»Р°Р±РѕСЂР°С‚РѕСЂРЅСѓСЋ СЂР°Р±РѕС‚Сѓ, РєРѕС‚РѕСЂСѓСЋ
+    РІС‹РїРѕР»РЅРёР»Рё РЅР°РёР±РѕР»СЊС€РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‡РµР»РѕРІРµРє РЅР° Р»СЋР±СѓСЋ РѕС†РµРЅРєСѓ СЃСЂРµРґРё РЅРµРїРѕР»СѓС‡РёРІС€РёС… РґРѕРїСѓСЃРє.
+    РќР°Р№С‚Рё РљР , РєРѕС‚РѕСЂСѓСЋ РІС‹РїРѕР»РЅРёР»Рё РЅР°РёРјРµРЅСЊС€РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‡РµР»РѕРІРµРє С…РѕС‚СЏ Р±С‹ РЅР° РґРѕРїСѓСЃРє СЃСЂРµРґРё РЅРµ
+    РїРѕР»РёРІС€РёС… РґРѕРїСѓСЃРє.
      */
     val students = fileRead()
 
@@ -222,42 +222,42 @@ fun main() {
             minK = i + 1
         }
     }
-    println("Лабораторная работа №$maxL была сдана наибольшим количеством студентов без допуска")
-    println("Контрольная работа №$minK была сдана наименьшим количеством студентов без допуска\n")
+    println("Р›Р°Р±РѕСЂР°С‚РѕСЂРЅР°СЏ СЂР°Р±РѕС‚Р° в„–$maxL Р±С‹Р»Р° СЃРґР°РЅР° РЅР°РёР±РѕР»СЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј СЃС‚СѓРґРµРЅС‚РѕРІ Р±РµР· РґРѕРїСѓСЃРєР°")
+    println("РљРѕРЅС‚СЂРѕР»СЊРЅР°СЏ СЂР°Р±РѕС‚Р° в„–$minK Р±С‹Р»Р° СЃРґР°РЅР° РЅР°РёРјРµРЅСЊС€РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј СЃС‚СѓРґРµРЅС‚РѕРІ Р±РµР· РґРѕРїСѓСЃРєР°\n")
 
     /**
-     * 2 Рассчитать самостоятельно в программе баллы за посещаемость, КР, ЛР и ЭП так же,
-    как в документе. Найти сумму баллов и вывести количество баллов за посещаемость, ЛР, ЭП,
-    КР, ИТОГО для каждого студента.
+     * 2 Р Р°СЃСЃС‡РёС‚Р°С‚СЊ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РІ РїСЂРѕРіСЂР°РјРјРµ Р±Р°Р»Р»С‹ Р·Р° РїРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ, РљР , Р›Р  Рё Р­Рџ С‚Р°Рє Р¶Рµ,
+    РєР°Рє РІ РґРѕРєСѓРјРµРЅС‚Рµ. РќР°Р№С‚Рё СЃСѓРјРјСѓ Р±Р°Р»Р»РѕРІ Рё РІС‹РІРµСЃС‚Рё РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°Р»Р»РѕРІ Р·Р° РїРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ, Р›Р , Р­Рџ,
+    РљР , РРўРћР“Рћ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°.
      */
     students.forEach {
-        println("Студент: ${it.name}\n" +
-                "Доп баллы: ${it.ex}\n" +
-                "Посещаемость: ${it.attendanceGrade()}\n" +
-                "Оценки за:\n" +
-                "\tЛабораторные работы: ${it.labWorks}\tВсего: ${it.labWorks.sum()}\n" +
-                "\tЭкзаменационный проект: ${it.exams}\tВсего: ${it.exams.sum()}\n" +
-                "\tКонтрольные работы: ${it.tests}\tВсего: ${it.tests.sum() * 2}\n" +
-                "Итого баллов: ${it.getTotalScore() + it.ex + it.exams.sum()}\n")
+        println("РЎС‚СѓРґРµРЅС‚: ${it.name}\n" +
+                "Р”РѕРї Р±Р°Р»Р»С‹: ${it.ex}\n" +
+                "РџРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ: ${it.attendanceGrade()}\n" +
+                "РћС†РµРЅРєРё Р·Р°:\n" +
+                "\tР›Р°Р±РѕСЂР°С‚РѕСЂРЅС‹Рµ СЂР°Р±РѕС‚С‹: ${it.labWorks}\tР’СЃРµРіРѕ: ${it.labWorks.sum()}\n" +
+                "\tР­РєР·Р°РјРµРЅР°С†РёРѕРЅРЅС‹Р№ РїСЂРѕРµРєС‚: ${it.exams}\tР’СЃРµРіРѕ: ${it.exams.sum()}\n" +
+                "\tРљРѕРЅС‚СЂРѕР»СЊРЅС‹Рµ СЂР°Р±РѕС‚С‹: ${it.tests}\tР’СЃРµРіРѕ: ${it.tests.sum() * 2}\n" +
+                "РС‚РѕРіРѕ Р±Р°Р»Р»РѕРІ: ${it.getTotalScore() + it.ex + it.exams.sum()}\n")
     }
     /**
-     * 3 Сформировать рейтинг так же, как и в разделе рейтинг программно. Вывести 5
-    худших среди получивших допуск, сгруппировав их по группам. Вывести 5 лучших среди не
-    получивших допуск, сгруппировав их по группам в том же формате, как и в разделе рейтинг,
-    то есть выводить проценты сделанного.
+     * 3 РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ СЂРµР№С‚РёРЅРі С‚Р°Рє Р¶Рµ, РєР°Рє Рё РІ СЂР°Р·РґРµР»Рµ СЂРµР№С‚РёРЅРі РїСЂРѕРіСЂР°РјРјРЅРѕ. Р’С‹РІРµСЃС‚Рё 5
+    С…СѓРґС€РёС… СЃСЂРµРґРё РїРѕР»СѓС‡РёРІС€РёС… РґРѕРїСѓСЃРє, СЃРіСЂСѓРїРїРёСЂРѕРІР°РІ РёС… РїРѕ РіСЂСѓРїРїР°Рј. Р’С‹РІРµСЃС‚Рё 5 Р»СѓС‡С€РёС… СЃСЂРµРґРё РЅРµ
+    РїРѕР»СѓС‡РёРІС€РёС… РґРѕРїСѓСЃРє, СЃРіСЂСѓРїРїРёСЂРѕРІР°РІ РёС… РїРѕ РіСЂСѓРїРїР°Рј РІ С‚РѕРј Р¶Рµ С„РѕСЂРјР°С‚Рµ, РєР°Рє Рё РІ СЂР°Р·РґРµР»Рµ СЂРµР№С‚РёРЅРі,
+    С‚Рѕ РµСЃС‚СЊ РІС‹РІРѕРґРёС‚СЊ РїСЂРѕС†РµРЅС‚С‹ СЃРґРµР»Р°РЅРЅРѕРіРѕ.
      */
     val rating = students.sortedBy { it.name }.sortedByDescending { it.getTotalScore() + it.ex }
 
-    val studOnlyAccess = rating.filter { it.evalPreGrade() == "допуск" }.takeLast(5)
-    val studNoAccess = rating.filter { it.evalPreGrade() == "недопуск" }.take(5)
+    val studOnlyAccess = rating.filter { it.evalPreGrade() == "РґРѕРїСѓСЃРє" }.takeLast(5)
+    val studNoAccess = rating.filter { it.evalPreGrade() == "РЅРµРґРѕРїСѓСЃРє" }.take(5)
 
-    println("№  ${"Группа".padEnd(6)} ${"Фамилия И О".padEnd(20)} ${"ат".padEnd(2)} " +
-            "${"Экзамен".padEnd(8)} ${"Пос".padEnd(3)} " +
-            "${"ЛР".padEnd(5)} " +
-            "${"ЭП".padEnd(5)} " +
-            "${"КР".padEnd(5)} " +
-            "${"Допуск".padEnd(6)} " +
-            "${"Итого".padEnd(5)}")
+    println("в„–  ${"Р“СЂСѓРїРїР°".padEnd(6)} ${"Р¤Р°РјРёР»РёСЏ Р Рћ".padEnd(20)} ${"Р°С‚".padEnd(2)} " +
+            "${"Р­РєР·Р°РјРµРЅ".padEnd(8)} ${"РџРѕСЃ".padEnd(3)} " +
+            "${"Р›Р ".padEnd(5)} " +
+            "${"Р­Рџ".padEnd(5)} " +
+            "${"РљР ".padEnd(5)} " +
+            "${"Р”РѕРїСѓСЃРє".padEnd(6)} " +
+            "${"РС‚РѕРіРѕ".padEnd(5)}")
     println()
     studOnlyAccess.forEachIndexed { index, it -> println("${(index + 1).toString().padEnd(2)} ${it.group.padEnd(6)} ${it.name.padEnd(20)} ${it.attest.padEnd(2)} " +
             "${it.evalPreGrade().padEnd(8)} ${(it.attendanceGrade() * 10).toString().padEnd(3)} " +
@@ -276,45 +276,45 @@ fun main() {
             "${(it.getTotalScore() + it.ex + it.exams.sum()).toString().padEnd(5)}") }
 
     /**
-     * 4 Сформировать программно раздел группы так же, как сформировано в таблице и
-    вывести на экран.
+     * 4 РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ РїСЂРѕРіСЂР°РјРјРЅРѕ СЂР°Р·РґРµР» РіСЂСѓРїРїС‹ С‚Р°Рє Р¶Рµ, РєР°Рє СЃС„РѕСЂРјРёСЂРѕРІР°РЅРѕ РІ С‚Р°Р±Р»РёС†Рµ Рё
+    РІС‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ.
      */
     val groupByGroup = students.groupBy { it.group }
     val results = groupByGroup.mapValues { entry ->
         val groupStudents = entry.value
 
-        val avgAttendance = groupStudents.map { it.attendanceGrade() }.average() // средняя посещаемость
-        val avgLabWorks = averageIntList(groupStudents.map { it.labWorks }) // средний балл за отдельные ЛР
-        val avgExams = averageIntList(groupStudents.map { it.exams }) // средний балл за отдельные ЭП
-        val avgTests = averageIntList(groupStudents.map { it.tests }) // средний балл за отдельные КР
-        val commonAttest = mostCommonAttest(groupStudents.map { it.attest }) // аттестация по группе
+        val avgAttendance = groupStudents.map { it.attendanceGrade() }.average() // СЃСЂРµРґРЅСЏСЏ РїРѕСЃРµС‰Р°РµРјРѕСЃС‚СЊ
+        val avgLabWorks = averageIntList(groupStudents.map { it.labWorks }) // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РѕС‚РґРµР»СЊРЅС‹Рµ Р›Р 
+        val avgExams = averageIntList(groupStudents.map { it.exams }) // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РѕС‚РґРµР»СЊРЅС‹Рµ Р­Рџ
+        val avgTests = averageIntList(groupStudents.map { it.tests }) // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РѕС‚РґРµР»СЊРЅС‹Рµ РљР 
+        val commonAttest = mostCommonAttest(groupStudents.map { it.attest }) // Р°С‚С‚РµСЃС‚Р°С†РёСЏ РїРѕ РіСЂСѓРїРїРµ
 
-        val avgCommonLabWorks = groupStudents.map { it.labWorks.sum() }.average() // средний балл за все ЛР
-        val avgCommonExams = groupStudents.map { it.exams.sum() }.average() // средний балл за все ЭП
-        val avgCommonTests = groupStudents.map { it.tests.sum() * 2 }.average() // средний балл за все КР
-        val avgCommonAccess = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 }.average() // средний балл на допуск
-        val avgCommonTotal = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 + it.ex}.average() // средний балл итого
+        val avgCommonLabWorks = groupStudents.map { it.labWorks.sum() }.average() // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РІСЃРµ Р›Р 
+        val avgCommonExams = groupStudents.map { it.exams.sum() }.average() // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РІСЃРµ Р­Рџ
+        val avgCommonTests = groupStudents.map { it.tests.sum() * 2 }.average() // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» Р·Р° РІСЃРµ РљР 
+        val avgCommonAccess = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 }.average() // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» РЅР° РґРѕРїСѓСЃРє
+        val avgCommonTotal = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 + it.ex}.average() // СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» РёС‚РѕРіРѕ
 
-        val avgPercentLabWorks = groupStudents.map { it.labWorks.sum().toDouble() / (it.labWorks.size * 5) * 100 }.average() // процент ЛР
-        val avgPercentExams = groupStudents.map { it.exams.sum().toDouble() / (it.exams.size * 5) * 100 }.average() // процент ЭП
-        val avgPercentTests = groupStudents.map { it.tests.sum().toDouble() * 2 / (it.tests.size * 10) * 100 }.average() // процент КР
-        val avgPercentAccess = groupStudents.map { (it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2).toDouble() / 75 * 100 }.average() // процент допуск
-        val avgPercentTotal = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 + it.ex }.average() // процент итого
+        val avgPercentLabWorks = groupStudents.map { it.labWorks.sum().toDouble() / (it.labWorks.size * 5) * 100 }.average() // РїСЂРѕС†РµРЅС‚ Р›Р 
+        val avgPercentExams = groupStudents.map { it.exams.sum().toDouble() / (it.exams.size * 5) * 100 }.average() // РїСЂРѕС†РµРЅС‚ Р­Рџ
+        val avgPercentTests = groupStudents.map { it.tests.sum().toDouble() * 2 / (it.tests.size * 10) * 100 }.average() // РїСЂРѕС†РµРЅС‚ РљР 
+        val avgPercentAccess = groupStudents.map { (it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2).toDouble() / 75 * 100 }.average() // РїСЂРѕС†РµРЅС‚ РґРѕРїСѓСЃРє
+        val avgPercentTotal = groupStudents.map { it.attendanceGrade() + it.labWorks.sum() + it.tests.sum() * 2 + it.ex }.average() // РїСЂРѕС†РµРЅС‚ РёС‚РѕРіРѕ
 
         GroupStats(avgAttendance, avgLabWorks, avgExams, avgTests, commonAttest,
             avgCommonLabWorks, avgCommonExams, avgCommonTests, avgCommonAccess, avgCommonTotal,
             avgPercentLabWorks, avgPercentExams, avgPercentTests, avgPercentAccess, avgPercentTotal)
     }
 
-    // Таблица групп
-    println("${"Группа".padEnd(6)} ${"ЛР1".padEnd(3)} ${"ЛР2".padEnd(3)} ${"ЛР3".padEnd(3)} " +
-            "${"ЛР4".padEnd(3)} ${"ЛР5".padEnd(3)} ${"ЛР6".padEnd(3)} ${"ЛР7".padEnd(3)} " +
-            "${"ЭП1".padEnd(3)} ${"ЭП2".padEnd(3)} ${"ЭП3".padEnd(3)} ${"ЭП4".padEnd(3)} ${"ЭП5".padEnd(3)} " +
-            "${"КР1".padEnd(3)} ${"КР2".padEnd(3)} ${"КР3".padEnd(3)} " +
-            "${"Пос".padEnd(4)} ${"ЛР".padEnd(4)} ${"ЭП".padEnd(4)} ${"КР".padEnd(4)} " +
-            "${"Допуск".padEnd(6)} ${"Итого".padEnd(5)} ${"Ат".padEnd(2)} ${"Оценка".padEnd(8)} " +
-            "${"Пос".padEnd(4)} ${"ЛР".padEnd(4)} ${"ЭП".padEnd(4)} ${"КР".padEnd(4)} " +
-            "${"Допуск".padEnd(6)} ${"Итого".padEnd(5)}")
+    // РўР°Р±Р»РёС†Р° РіСЂСѓРїРї
+    println("${"Р“СЂСѓРїРїР°".padEnd(6)} ${"Р›Р 1".padEnd(3)} ${"Р›Р 2".padEnd(3)} ${"Р›Р 3".padEnd(3)} " +
+            "${"Р›Р 4".padEnd(3)} ${"Р›Р 5".padEnd(3)} ${"Р›Р 6".padEnd(3)} ${"Р›Р 7".padEnd(3)} " +
+            "${"Р­Рџ1".padEnd(3)} ${"Р­Рџ2".padEnd(3)} ${"Р­Рџ3".padEnd(3)} ${"Р­Рџ4".padEnd(3)} ${"Р­Рџ5".padEnd(3)} " +
+            "${"РљР 1".padEnd(3)} ${"РљР 2".padEnd(3)} ${"РљР 3".padEnd(3)} " +
+            "${"РџРѕСЃ".padEnd(4)} ${"Р›Р ".padEnd(4)} ${"Р­Рџ".padEnd(4)} ${"РљР ".padEnd(4)} " +
+            "${"Р”РѕРїСѓСЃРє".padEnd(6)} ${"РС‚РѕРіРѕ".padEnd(5)} ${"РђС‚".padEnd(2)} ${"РћС†РµРЅРєР°".padEnd(8)} " +
+            "${"РџРѕСЃ".padEnd(4)} ${"Р›Р ".padEnd(4)} ${"Р­Рџ".padEnd(4)} ${"РљР ".padEnd(4)} " +
+            "${"Р”РѕРїСѓСЃРє".padEnd(6)} ${"РС‚РѕРіРѕ".padEnd(5)}")
     results.forEach { (group, stats) ->
         print("${group.padEnd(6)} ")
         for (i in 0..6)
@@ -331,11 +331,11 @@ fun main() {
                 "${String.format("%.1f", stats.avgCommonTotal).padEnd(5)} " +
                 "${stats.commonAttest.padEnd(2)} ")
         print((when {
-            stats.avgCommonAccess < 30 -> "недопуск"
-            stats.avgCommonTotal < 60 -> "допуск"
-            stats.avgCommonTotal < 75 -> "САМОКАТ"
-            stats.avgCommonTotal < 90 -> "ХОРОШО"
-            else -> "ОТЛИЧНО"
+            stats.avgCommonAccess < 30 -> "РЅРµРґРѕРїСѓСЃРє"
+            stats.avgCommonTotal < 60 -> "РґРѕРїСѓСЃРє"
+            stats.avgCommonTotal < 75 -> "РЎРђРњРћРљРђРў"
+            stats.avgCommonTotal < 90 -> "РҐРћР РћРЁРћ"
+            else -> "РћРўР›РР§РќРћ"
         }).padEnd(8))
         print(" ${(String.format("%.0f", stats.avgAttendance * 10) + "%").padEnd(4)} " +
                 "${(String.format("%.0f", stats.avgPercentLabWorks) + "%").padEnd(4)} " +
@@ -345,8 +345,8 @@ fun main() {
                 "${(String.format("%.0f", stats.avgPercentTotal) + "%").padEnd(4)} ")
         println()
     }
-    // Средние значения по каждому столбцу
-    print("3 курс ")
+    // РЎСЂРµРґРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РїРѕ РєР°Р¶РґРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ
+    print("3 РєСѓСЂСЃ ")
     for (i in 0..6)
         print(printFormatted(results.map { (_, stats) -> stats.avgLabWorks[i] }.average()))
     for (i in 0..4)
@@ -359,13 +359,13 @@ fun main() {
             "${String.format("%.1f", results.map { (_, stats) -> stats.avgCommonTests }.average()).padEnd(4)} " +
             "${String.format("%.1f", results.map { (_, stats) -> stats.avgCommonAccess }.average()).padEnd(6)} " +
             "${String.format("%.1f", results.map { (_, stats) -> stats.avgCommonTotal }.average()).padEnd(5)} " +
-            "ат ")
+            "Р°С‚ ")
     print((when {
-        results.map { (_, stats) -> stats.avgCommonAccess }.average() <= 75 * 0.4 -> "недопуск"
-        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 60 -> "допуск"
-        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 75 -> "САМОКАТ"
-        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 90 -> "ХОРОШО"
-        else -> "ОТЛИЧНО"
+        results.map { (_, stats) -> stats.avgCommonAccess }.average() <= 75 * 0.4 -> "РЅРµРґРѕРїСѓСЃРє"
+        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 60 -> "РґРѕРїСѓСЃРє"
+        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 75 -> "РЎРђРњРћРљРђРў"
+        results.map { (_, stats) -> stats.avgCommonTotal }.average() < 90 -> "РҐРћР РћРЁРћ"
+        else -> "РћРўР›РР§РќРћ"
     }).padEnd(8))
     print(" ${(String.format("%.0f", results.map { (_, stats) -> stats.avgAttendance * 10 }.average()) + "%").padEnd(4)} " +
             "${(String.format("%.0f", results.map { (_, stats) -> stats.avgPercentLabWorks }.average()) + "%").padEnd(4)} " +
@@ -374,11 +374,11 @@ fun main() {
             "${(String.format("%.0f", results.map { (_, stats) -> stats.avgPercentAccess }.average()) + "%").padEnd(6)} " +
             "${(String.format("%.0f", results.map { (_, stats) -> stats.avgPercentTotal }.average()) + "%").padEnd(5)} ")
     /**
-     * 5 Найти группу, в которой наименьший средний балл на допуск среди тех, кто получил
-    оценки 3, 4, 5
+     * 5 РќР°Р№С‚Рё РіСЂСѓРїРїСѓ, РІ РєРѕС‚РѕСЂРѕР№ РЅР°РёРјРµРЅСЊС€РёР№ СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» РЅР° РґРѕРїСѓСЃРє СЃСЂРµРґРё С‚РµС…, РєС‚Рѕ РїРѕР»СѓС‡РёР»
+    РѕС†РµРЅРєРё 3, 4, 5
      */
-    val autoExam = students.filter { it.evalPreGrade() in listOf("ОТЛИЧНО", "ХОРОШО", "САМОКАТ") }
+    val autoExam = students.filter { it.evalPreGrade() in listOf("РћРўР›РР§РќРћ", "РҐРћР РћРЁРћ", "РЎРђРњРћРљРђРў") }
     val groupByGroupWithEx = autoExam.groupBy { it.group }
     val avgInGroup = groupByGroupWithEx.mapValues { (_, group) -> group.map { it.getTotalScore().toDouble() / (it.attendanceGrade() + it.labWorks.size * 5 + it.tests.size * 10) * 100 }.average() }
-    println("В группе ${avgInGroup.minByOrNull { it.value }?.key} наименьший средний балл на допуск среди тех, кто получил 3, 4 или 5")
+    println("Р’ РіСЂСѓРїРїРµ ${avgInGroup.minByOrNull { it.value }?.key} РЅР°РёРјРµРЅСЊС€РёР№ СЃСЂРµРґРЅРёР№ Р±Р°Р»Р» РЅР° РґРѕРїСѓСЃРє СЃСЂРµРґРё С‚РµС…, РєС‚Рѕ РїРѕР»СѓС‡РёР» 3, 4 РёР»Рё 5")
 }
